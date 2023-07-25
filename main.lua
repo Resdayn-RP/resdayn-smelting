@@ -19,7 +19,6 @@ end
 
 ---@param seconds integer
 function smelting.smeltingProcess(seconds)
-    -- define interval and interval target
     local interval, elapsed = seconds / 4, 0
     while elapsed < seconds do
         elapsed  = elapsed + interval
@@ -31,7 +30,6 @@ end
 ---@param targetMat string
 function smelting.startSmelting(pid, targetMat)
     if not (targetMat or smelting.recipes[targetMat]) then return end
-
     if not smelting.isInRange(pid) then return end
 
     local player = Players[pid]
@@ -40,9 +38,7 @@ function smelting.startSmelting(pid, targetMat)
     if tes3mp.GetInventoryItemCount(pid, input.item) < input.amount then return end
 
     ResdaynCore.functions.removeItem(player, input.item, input.amount)
-    
     smelting.smeltingProcess(input.time)
-
     ResdaynCore.functions.addItem(player, output.item, output.amount)
 end
 
